@@ -51,37 +51,55 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+// function game() {
+//     let playerScore = 0;
+//     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = prompt("Rock, Paper, Scissors");
-        let computerChoice = getComputerChoice();
+//     for (let i = 0; i < 5; i++) {
+//         let playerChoice = prompt("Rock, Paper, Scissors");
+//         let computerChoice = getComputerChoice();
 
-        let winner = playRound(playerChoice, computerChoice);
-        winner = winner.toLowerCase();
+//         let winner = playRound(playerChoice, computerChoice);
+//         winner = winner.toLowerCase();
 
-        if (winner.includes("lose")) {
-            computerScore += 1;
-            console.log("Lose");
-        } else if (winner.includes("win")) {
-            playerScore += 1;
-            console.log("Win");
-        } else {
-            console.log("Draw");
-        }
-    }
+//         if (winner.includes("lose")) {
+//             computerScore += 1;
+//             console.log("Lose");
+//         } else if (winner.includes("win")) {
+//             playerScore += 1;
+//             console.log("Win");
+//         } else {
+//             console.log("Draw");
+//         }
+//     }
 
-    if (playerScore > computerScore) {
-        console.log("You win!");
+//     if (playerScore > computerScore) {
+//         console.log("You win!");
 
-    } else if (playerScore === computerScore) {
-        console.log("It's a draw!");
+//     } else if (playerScore === computerScore) {
+//         console.log("It's a draw!");
         
-    } else {
-        console.log("PC wins!");
-    }
-}
+//     } else {
+//         console.log("PC wins!");
+//     }
+// }
 
-game();
+
+
+// game();
+
+const buttons = document.querySelectorAll("button");
+const div = document.querySelector('.score');
+
+buttons.forEach( (button) => {
+    button.addEventListener('click', () => {
+        console.log(button.getAttribute('class'));
+        let computerChoice = getComputerChoice();
+        let playerChoice = button.getAttribute('class');
+        let winner = playRound(playerChoice, computerChoice);
+        console.log(winner);
+        div.textContent = winner;
+        
+
+    });
+});
