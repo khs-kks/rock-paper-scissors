@@ -87,19 +87,53 @@ function playRound(playerSelection, computerSelection) {
 
 
 // game();
+function game(){
 
-const buttons = document.querySelectorAll("button");
-const div = document.querySelector('.score');
+    const buttons = document.querySelectorAll("button");
+    const div = document.querySelector('.score');
+    
+    let playerScore = 0;
+    let computerScore = 0;
 
-buttons.forEach( (button) => {
-    button.addEventListener('click', () => {
-        console.log(button.getAttribute('class'));
-        let computerChoice = getComputerChoice();
-        let playerChoice = button.getAttribute('class');
-        let winner = playRound(playerChoice, computerChoice);
-        console.log(winner);
-        div.textContent = winner;
-        
+    buttons.forEach( (button) => {
+        button.addEventListener('click', () => {
+            // console.log(button.getAttribute('class'));
+            let computerChoice = getComputerChoice();
+            let playerChoice = button.getAttribute('class');
+            let winner = playRound(playerChoice, computerChoice);
+            // console.log(winner);
 
+
+
+            if (playerScore < 5 && computerScore < 5) {
+                let temp_winner = winner.toLowerCase();
+
+                if (temp_winner.includes("lose")) {
+                    computerScore += 1;
+                    div.textContent = `You lose! ${playerScore} : ${computerScore}`;
+                } else if (temp_winner.includes("win")) {
+                    playerScore += 1;
+                    div.textContent = `You win! ${playerScore} : ${computerScore}`;
+
+                } else {
+                    div.textContent = `It's a draw! ${playerScore} : ${computerScore}`;
+                }   
+            };
+
+            if (playerScore >= 5) {
+                div.textContent = `Congratulations! You win! ${playerScore} : ${computerScore}`;
+                playerScore = 0;
+                computerScore = 0;
+            } else if (computerScore >=5 ) {
+                div.textContent = `Game over! PC wins! ${playerScore} : ${computerScore}` ;
+                playerScore = 0;
+                computerScore = 0;
+            }
+            // div.textContent = winner;
+            
+    
+        });
     });
-});
+}
+
+game();
